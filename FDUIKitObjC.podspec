@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FDUIKitObjC'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'FDUIKitObjC是一个UI库，包含自定义ActionSheet，自定义AlertView，照片浏览器，自定义PopView'
 
 # This description is used to generate tags and improve search results.
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'ssh://fandongtongxue@192.168.50.235/volume1/git/FDUIKitObjC'
+  s.homepage         = 'http://git.bogokj.com/fandong/FDUIKitObjC'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'fandongtongxue' => 'admin@fandong.me' }
-  s.source           = { :git => 'ssh://fandongtongxue@192.168.50.235/volume1/git/FDUIKitObjC.git', :tag => s.version.to_s }
+  s.source           = { :git => 'http://git.bogokj.com/fandong/FDUIKitObjC.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
