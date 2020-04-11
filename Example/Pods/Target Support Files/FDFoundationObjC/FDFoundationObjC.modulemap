@@ -1,0 +1,6 @@
+framework module FDFoundationObjC {
+  umbrella header "FDFoundationObjC-umbrella.h"
+
+  export *
+  module * { export * }
+}

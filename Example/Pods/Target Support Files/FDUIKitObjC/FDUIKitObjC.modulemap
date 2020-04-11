@@ -1,0 +1,6 @@
+framework module FDUIKitObjC {
+  umbrella header "FDUIKitObjC-umbrella.h"
+
+  export *
+  module * { export * }
+}
