@@ -29,6 +29,7 @@
 
 #import "FDNavigationController.h"
 #import "FDTabBarController.h"
+#import "FDWebViewController.h"
 
 #import "FDTableView.h"
 #import "FDTableViewCell.h"

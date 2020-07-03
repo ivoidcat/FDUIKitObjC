@@ -11,4 +11,6 @@
 #define FD_WhiteColor [UIColor whiteColor]
 #define FD_BlackColor [UIColor blackColor]
 
+#define FD_ClearColor [UIColor clearColor]
+
 #endif /* FDUIColorDefine_h */
