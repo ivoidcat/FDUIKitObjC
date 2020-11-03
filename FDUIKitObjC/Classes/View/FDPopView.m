@@ -20,7 +20,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = FD_WhiteColor;
         self.fd_y = FD_ScreenHeight;
     }
     return self;

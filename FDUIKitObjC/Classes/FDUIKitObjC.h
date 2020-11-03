@@ -33,5 +33,6 @@
 
 #import "FDTableView.h"
 #import "FDTableViewCell.h"
+#import <Masonry/Masonry.h>
 
 #endif /* FDUIKitObjC_h */
