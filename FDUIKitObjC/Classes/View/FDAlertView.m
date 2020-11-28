@@ -15,11 +15,14 @@
 
 @interface FDAlertView ()
 
+@property(nonatomic, strong) UIImageView *imageView;
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UILabel *contentLabel;
-@property(nonatomic, strong) UIView *bottomLineView;
 @property(nonatomic, assign) CGFloat bottomY;
 @property(nonatomic, strong) NSMutableArray *actionArray;
+
+@property(nonatomic, strong) UIView *bottomLineView;
+@property(nonatomic, strong) UIView *marginView;
 
 @end
 
@@ -28,8 +31,25 @@
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message{
     if (self = [super initWithFrame:CGRectMake(40, FD_ScreenHeight, FD_ScreenWidth - 80, 1)]) {
         self.backgroundColor = FD_WhiteColor;
-        self.layer.cornerRadius = 5;
+        self.layer.cornerRadius = 10;
         self.clipsToBounds = YES;
+        self.titleLabel.text = title;
+        [self.contentLabel setText:message];
+        [self addSubview:self.titleLabel];
+        [self addSubview:self.contentLabel];
+        self.contentLabel.frame = CGRectMake(10, _titleLabel.fd_bottom, self.fd_width - 20, [message fd_textSizeIn:CGSizeMake(self.fd_width - 20, MAXFLOAT) font:[UIFont systemFontOfSize:14]].height + 20);
+        self.bottomY = self.contentLabel.fd_bottom + 20;
+    }
+    return self;
+}
+
+- (instancetype)initWithImage:(UIImage *)image title:(NSString *)title message:(NSString *)message{
+    if (self = [super initWithFrame:CGRectMake(40, FD_ScreenHeight, FD_ScreenWidth - 80, 1)]) {
+        self.backgroundColor = FD_WhiteColor;
+        self.layer.cornerRadius = 10;
+        self.clipsToBounds = YES;
+        [self.imageView setImage:image];
+        [self addSubview:self.imageView];
         self.titleLabel.text = title;
         [self.contentLabel setText:message];
         [self addSubview:self.titleLabel];
@@ -55,32 +75,25 @@
 
 - (void)show:(UIView *)superView{
     for (NSInteger i = 0; i < self.actionArray.count; i++) {
-        CGFloat buttonWidth = (self.width - 30 ) / self.actionArray.count;
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(10 + (buttonWidth + 10) * i, self.bottomY, buttonWidth, 35)];
+        CGFloat buttonWidth = self.width / self.actionArray.count;
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(buttonWidth * i, self.bottomY, buttonWidth, 40)];
         FDAction *action = self.actionArray[i];
         [button setTitle:action.title forState:UIControlStateNormal];
-        button.layer.cornerRadius = 3;
-        button.clipsToBounds = YES;
-        CAGradientLayer *gl = [CAGradientLayer layer];
-        gl.frame = button.bounds;
-        gl.startPoint = CGPointMake(0, 0);
-        gl.endPoint = CGPointMake(1, 1);
         if (action.type == FDActionTypeDefault) {
-            gl.colors = @[(__bridge id)[UIColor colorWithRed:38/255.0 green:232/255.0 blue:198/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:0/255.0 green:205/255.0 blue:213/255.0 alpha:1.0].CGColor];
+            [button setTitleColor:[UIColor colorWithHexString:@"#F7AC08"] forState:UIControlStateNormal];
         }else{
-            gl.colors = @[(__bridge id)[UIColor colorWithRed:244/255.0 green:244/255.0 blue:244/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1.0].CGColor];
+            [button setTitleColor:[UIColor colorWithHexString:@"#777777"] forState:UIControlStateNormal];
         }
-        gl.locations = @[@(0.0),@(1.0f)];
-        [button.layer addSublayer:gl];
-        
         [button addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = 100 + i;
-        [button.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
         [self addSubview:button];
-        
     }
-    
-    self.bounds = CGRectMake(0, 0, self.fd_width, self.bottomY + 55);
+    self.bounds = CGRectMake(0, 0, self.fd_width, self.bottomY + 40);
+    [self addSubview:self.bottomLineView];
+    if (self.actionArray.count > 1) {
+        [self addSubview:self.marginView];
+    }
     [super show:superView type:FDPopTypeCenter];
 }
 
@@ -91,11 +104,18 @@
     return _actionArray;
 }
 
+- (UIImageView *)imageView{
+    if (!_imageView) {
+        _imageView = [[UIImageView alloc]initWithFrame:CGRectMake((FD_ScreenWidth - 80 - 40 ) / 2, 25, 40, 40)];
+    }
+    return _imageView;
+}
+
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, self.fd_width - 20, 25)];
+        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.imageView.image ? self.imageView.bottom + 10 : 20, self.fd_width, 22)];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont boldSystemFontOfSize:18];
+        _titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         _titleLabel.textColor = [UIColor colorWithHexString:@"#333333"];
     }
     return _titleLabel;
@@ -105,11 +125,27 @@
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, _titleLabel.fd_bottom + 20, self.fd_width - 20, 20)];
         _contentLabel.textAlignment = NSTextAlignmentCenter;
-        _contentLabel.font = [UIFont systemFontOfSize:14];
+        _contentLabel.font = [UIFont systemFontOfSize:13];
         _contentLabel.numberOfLines = 0;
-        _contentLabel.textColor = [UIColor colorWithHexString:@"666666"];
+        _contentLabel.textColor = [UIColor colorWithHexString:@"777777"];
     }
     return _contentLabel;
+}
+
+- (UIView *)bottomLineView{
+    if (!_bottomLineView) {
+        _bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, self.height - 40, self.width, 0.5)];
+        _bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#E6E6E6"];
+    }
+    return _bottomLineView;
+}
+
+- (UIView *)marginView{
+    if (!_marginView) {
+        _marginView = [[UIView alloc]initWithFrame:CGRectMake(self.width / 2 - 0.5, self.height - 40, 0.5, self.width / 2)];
+        _marginView.backgroundColor = [UIColor colorWithHexString:@"#E6E6E6"];
+    }
+    return _marginView;
 }
 
 @end

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FDUIKitObjC'
-  s.version          = '1.1.1'
+  s.version          = '1.1.2'
   s.summary          = 'FDUIKitObjC是一个UI库，包含自定义ActionSheet，自定义AlertView，照片浏览器，自定义PopView'
 
 # This description is used to generate tags and improve search results.

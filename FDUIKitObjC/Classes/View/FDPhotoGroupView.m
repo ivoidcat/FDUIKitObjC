@@ -55,7 +55,7 @@
 
 @interface FDPhotoGroupCell : UIScrollView <UIScrollViewDelegate>
 @property (nonatomic, strong) UIView *imageContainerView;
-@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) YYAnimatedImageView *imageView;
 @property (nonatomic, assign) NSInteger page;
 
 @property (nonatomic, assign) BOOL showProgress;
@@ -85,7 +85,7 @@
     _imageContainerView.clipsToBounds = YES;
     [self addSubview:_imageContainerView];
     
-    _imageView = [UIImageView new];
+    _imageView = [YYAnimatedImageView new];
     _imageView.clipsToBounds = YES;
     _imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
     [_imageContainerView addSubview:_imageView];
