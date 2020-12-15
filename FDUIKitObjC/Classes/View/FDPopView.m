@@ -29,6 +29,10 @@
 }
 
 - (void)show:(UIView *)superView type:(FDPopType)type{
+    if (type == FDPopTypeTop) {
+        self.fd_y = - self.fd_height;
+    }
+    _type = type;
     [superView addSubview:self.shadowView];
     [superView addSubview:self];
     __weak __typeof(self)weakSelf = self;
