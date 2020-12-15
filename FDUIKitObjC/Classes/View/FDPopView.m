@@ -14,6 +14,8 @@
 
 @property(nonatomic, strong) UIView *shadowView;
 
+@property(nonatomic, assign) FDPopType type;
+
 @end
 
 @implementation FDPopView
@@ -40,6 +42,9 @@
             case FDPopTypeCenter:
                 offsetY = ( superView.fd_height - strongSelf.fd_height ) / 2;
                 break;
+            case FDPopTypeTop:
+                offsetY = FD_StatusBar_Height;
+                break;
             default:
                 break;
         }
@@ -49,9 +54,13 @@
 
 - (void)hide{
     __weak __typeof(self)weakSelf = self;
+    CGFloat offsetY = self.superview.fd_height;
+    if (_type == FDPopTypeTop) {
+        offsetY = - self.fd_height;
+    }
     [UIView animateWithDuration:0.25 animations:^{
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        strongSelf.frame = CGRectMake(strongSelf.fd_left, self.superview.fd_height, strongSelf.fd_width, strongSelf.fd_height);
+        strongSelf.frame = CGRectMake(strongSelf.fd_left, offsetY, strongSelf.fd_width, strongSelf.fd_height);
     } completion:^(BOOL finished) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         [strongSelf.shadowView removeFromSuperview];

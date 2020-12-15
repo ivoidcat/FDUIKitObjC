@@ -11,7 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, FDPopType) {
     FDPopTypeCenter,
-    FDPopTypeBottom
+    FDPopTypeBottom,
+    FDPopTypeTop,
 };
 
 @interface FDPopView : FDView
