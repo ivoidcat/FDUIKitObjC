@@ -5,11 +5,11 @@
 //  Created by bogokj on 2020/6/6.
 //
 
-#import "FDModel.h"
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BogoAddressWebModel : FDModel
+@interface BogoAddressWebModel : NSObject
 
 //{
 //    address = "\U6cf0\U5c71\U5927\U8857335\U9644\U8fd1";
