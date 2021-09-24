@@ -34,5 +34,6 @@
 #import "FDTableView.h"
 #import "FDTableViewCell.h"
 #import <Masonry/Masonry.h>
+#import "MLMSegmentManager.h"
 
 #endif /* FDUIKitObjC_h */

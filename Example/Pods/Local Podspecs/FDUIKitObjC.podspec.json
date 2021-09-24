@@ -1,19 +1,15 @@
 {
   "name": "FDUIKitObjC",
-  "version": "1.0.8",
+  "version": "2.0",
   "summary": "FDUIKitObjC是一个UI库，包含自定义ActionSheet，自定义AlertView，照片浏览器，自定义PopView",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "http://git.bogokj.com/fandong/FDUIKitObjC",
-  "license": {
-    "type": "MIT",
-    "file": "LICENSE"
-  },
   "authors": {
     "fandongtongxue": "admin@fandong.me"
   },
   "source": {
     "git": "http://git.bogokj.com/fandong/FDUIKitObjC.git",
-    "tag": "1.0.8"
+    "tag": "2.0"
   },
   "platforms": {
     "ios": "9.0"
