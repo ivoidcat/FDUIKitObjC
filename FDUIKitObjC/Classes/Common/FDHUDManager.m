@@ -29,8 +29,7 @@
     [self hideLoading];
     NSString *newMessage = message;
     if (!message.length) {
-        newMessage = @"默认文字";
-//        abort();
+       return;
     }
     _hud = [MBProgressHUD showHUDAddedTo:superView animated:YES];
     // Set the text mode to show only text.
