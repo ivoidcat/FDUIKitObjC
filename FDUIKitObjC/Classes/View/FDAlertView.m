@@ -35,9 +35,14 @@
         self.clipsToBounds = YES;
         self.titleLabel.text = title;
         [self.contentLabel setText:message];
-        [self addSubview:self.titleLabel];
-        [self addSubview:self.contentLabel];
-        self.contentLabel.frame = CGRectMake(10, _titleLabel.fd_bottom, self.fd_width - 20, [message fd_textSizeIn:CGSizeMake(self.fd_width - 20, MAXFLOAT) font:[UIFont systemFontOfSize:14]].height + 20);
+        if (title.length) {
+            [self addSubview:self.titleLabel];
+        }
+        if (message.length) {
+            [self addSubview:self.contentLabel];
+        }
+        
+        self.contentLabel.frame = CGRectMake(10, title.length ? _titleLabel.fd_bottom : 35, self.fd_width - 20, [message fd_textSizeIn:CGSizeMake(self.fd_width - 20, MAXFLOAT) font:[UIFont systemFontOfSize:14]].height + 20);
         self.bottomY = self.contentLabel.fd_bottom + 20;
     }
     return self;
@@ -80,7 +85,7 @@
         FDAction *action = self.actionArray[i];
         [button setTitle:action.title forState:UIControlStateNormal];
         if (action.type == FDActionTypeDefault) {
-            [button setTitleColor:[UIColor colorWithHexString:@"#F7AC08"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:@"#9152F8"] forState:UIControlStateNormal];
         }else{
             [button setTitleColor:[UIColor colorWithHexString:@"#777777"] forState:UIControlStateNormal];
         }
@@ -125,9 +130,9 @@
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, _titleLabel.fd_bottom + 20, self.fd_width - 20, 20)];
         _contentLabel.textAlignment = NSTextAlignmentCenter;
-        _contentLabel.font = [UIFont systemFontOfSize:13];
+        _contentLabel.font = [UIFont systemFontOfSize:14];
         _contentLabel.numberOfLines = 0;
-        _contentLabel.textColor = [UIColor colorWithHexString:@"777777"];
+        _contentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     }
     return _contentLabel;
 }
