@@ -56,6 +56,8 @@ typedef enum : NSUInteger {
 
 - (void)changeSource:(NSArray *)sources;
 
+- (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
+
 
 /**
  * 创建之后，初始化
